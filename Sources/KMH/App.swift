@@ -183,7 +183,7 @@ enum LoginItem {
     static func set(_ on: Bool) { try? on ? SMAppService.mainApp.register() : SMAppService.mainApp.unregister() }
 }
 
-@main
+@main @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     static var shared: AppDelegate?
     var window: NSWindow?

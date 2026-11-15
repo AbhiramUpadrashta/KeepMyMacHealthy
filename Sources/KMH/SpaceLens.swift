@@ -120,9 +120,9 @@ struct Sunburst: View {
             let slices = layout()
             ZStack {
                 ForEach(slices, id: \.0.id) { s in
-                    Slice(start: s.1, end: s.2, inner: r * 0.45, outer: r * (s.0.id == hovered ? 1 : 0.94))
+                    ArcSlice(start: s.1, end: s.2, inner: r * 0.45, outer: r * (s.0.id == hovered ? 1 : 0.94))
                         .fill(SpaceLensView.palette[s.3 % SpaceLensView.palette.count].gradient.opacity(s.0.id == hovered ? 1 : 0.8))
-                        .overlay(Slice(start: s.1, end: s.2, inner: r * 0.45, outer: r * 0.94).stroke(Color.black.opacity(0.35), lineWidth: 1))
+                        .overlay(ArcSlice(start: s.1, end: s.2, inner: r * 0.45, outer: r * 0.94).stroke(Color.black.opacity(0.35), lineWidth: 1))
                         .animation(.spring(response: 0.3), value: hovered)
                 }
             }
@@ -149,7 +149,7 @@ struct Sunburst: View {
     }
 }
 
-struct Slice: Shape {
+struct ArcSlice: Shape {
     var start: Double, end: Double, inner: CGFloat, outer: CGFloat
     var animatableData: CGFloat { get { outer } set { outer = newValue } }
     func path(in rect: CGRect) -> Path {

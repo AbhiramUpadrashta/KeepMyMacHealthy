@@ -309,7 +309,7 @@ struct GroupList: View {
                         Spacer()
                         Text(FS.fmt(g.selectedTotal)).font(.system(size: 12, weight: .medium)).monospacedDigit().foregroundStyle(.secondary)
                     }
-                    .padding(.vertical, 3).tag(g.id)
+                    .padding(.vertical, 3).tag(Optional(g.id))
                 }
             }
             .scrollContentBackground(.hidden)

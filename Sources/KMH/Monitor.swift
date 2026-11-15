@@ -21,7 +21,8 @@ final class Health: ObservableObject {
     @Published var charging = false
     @Published var cycles: Int?
     @Published var batteryHealth: Int?
-    @Published var down = 0.0, up = 0.0  // bytes/s
+    @Published var down = 0.0          // bytes/s
+    @Published var up = 0.0
     @Published var history: [Double] = Array(repeating: 0, count: 40)
     private var lastTicks: (UInt64, UInt64)?
     private var lastNet: (UInt64, UInt64, Date)?
