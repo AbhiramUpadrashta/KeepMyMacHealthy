@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>                   <string>KeepMyMacHealthy</string>
+    <key>CFBundleDisplayName</key>            <string>KeepMyMacHealthy</string>
+    <key>CFBundleIdentifier</key>             <string>com.bubblesaro.keepmymachealthy</string>
+    <key>CFBundleExecutable</key>             <string>KeepMyMacHealthy</string>
+    <key>CFBundlePackageType</key>            <string>APPL</string>
+    <key>CFBundleShortVersionString</key>     <string>1.0.0</string>
+    <key>CFBundleVersion</key>                <string>1</string>
+    <key>CFBundleIconFile</key>               <string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key>         <string>14.0</string>
+    <key>LSApplicationCategoryType</key>      <string>public.app-category.utilities</string>
+    <key>NSHighResolutionCapable</key>        <true/>
+    <key>NSHumanReadableCopyright</key>       <string>© 2026 Abhiram Upadrashta · Bubbles Aro · MIT License</string>
+    <key>NSAppleEventsUsageDescription</key>  <string>KeepMyMacHealthy asks macOS for your password to run maintenance tasks that need it.</string>
+</dict>
+</plist>

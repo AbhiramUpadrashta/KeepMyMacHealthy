@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KeepMyMacHealthy — free Mac care by Bubbles Aro</title>
+<meta name="description" content="KeepMyMacHealthy is a free, open-source Mac care app: Smart Care, Cleanup, Protection, Performance, Uninstaller & Updater, My Clutter, Space Lens, Health Monitor and Shredder. By Bubbles Aro.">
+<link rel="icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070d;--card:#11111c;--line:#ffffff14;--t:#f4f4fb;--m:#a4a4bd;--b:#7C9CFF;--p:#FF8FB1;--g:#7CF0C8;--a:#FFBC5C;--r:#FF7F8C;--v:#B88CFF;--c:#66D1FF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.grad{background:linear-gradient(90deg,var(--b),var(--p),var(--g));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:#07070dcc;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:22px;height:62px}
+nav img{width:30px;height:30px}
+nav b{font-size:15px}
+nav .sp{flex:1}
+nav a.l{color:var(--m);font-size:14px}
+nav a.l:hover{color:var(--t)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--line);transition:.25s}
+.btn.pri{background:linear-gradient(90deg,var(--b),var(--p));border:0;color:#0b0b14;box-shadow:0 10px 40px #ff8fb144}
+.btn.pri:hover{transform:translateY(-2px);box-shadow:0 16px 50px #ff8fb166}
+.btn:hover{border-color:#ffffff40}
+header{position:relative;padding:90px 0 40px;text-align:center}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;z-index:-1;animation:float 12s ease-in-out infinite}
+@keyframes float{50%{transform:translate(30px,-30px) scale(1.1)}}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.03em;font-weight:800}
+.lead{color:var(--m);font-size:clamp(16px,2vw,19px);max-width:640px;margin:18px auto 0}
+.cta{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+.small{color:var(--m);font-size:13px;margin-top:12px}
+/* app mock */
+.mock{margin:56px auto 0;max-width:960px;border-radius:18px;border:1px solid var(--line);background:#0c0c15;box-shadow:0 40px 120px #000a,0 0 0 1px #ffffff08;overflow:hidden;display:grid;grid-template-columns:200px 1fr;min-height:470px;text-align:left}
+.side{background:#0f0f19;padding:16px 10px;border-right:1px solid var(--line)}
+.dots{display:flex;gap:6px;margin:0 6px 18px}.dots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.side .it{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:9px;font-size:13px;color:#d8d8e6;cursor:pointer;transition:.2s}
+.side .it.on,.side .it:hover{background:#ffffff12}
+.side .ic{width:22px;height:22px;border-radius:7px;display:grid;place-items:center}
+.side .ic svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.side .sec{font-size:9.5px;letter-spacing:.08em;color:var(--m);margin:12px 8px 4px}
+.stage{position:relative;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.stage .bg{position:absolute;inset:0;background:radial-gradient(600px 400px at 100% 0,var(--tint,#ff8fb1)55,transparent 60%);opacity:.5;transition:background .6s}
+.ring{position:relative;width:170px;height:170px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:40px;font-weight:800}
+.ring .num small{display:block;font-size:11px;color:var(--m);font-weight:500}
+.stage h3{font-size:24px;margin-top:16px;position:relative}
+.stage p{color:var(--m);font-size:13px;position:relative;text-align:center;max-width:380px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-top:18px;position:relative}
+.tile{background:#ffffff0d;border:1px solid var(--line);border-radius:12px;padding:10px 12px;opacity:0;transform:translateY(10px);transition:.5s}
+.tile.show{opacity:1;transform:none}
+.tile b{display:block;font-size:20px}.tile span{font-size:11px;color:var(--m)}
+.go{position:relative;margin-top:20px;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:linear-gradient(var(--tint,#ff8fb1),#ffffff33);box-shadow:0 0 30px var(--tint,#ff8fb1)88;animation:pulse 2.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 50px var(--tint,#ff8fb1)}}
+section{padding:90px 0}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--p);font-weight:700;margin-bottom:10px}
+h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-.02em;line-height:1.1}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.f{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:.3s}
+.f:hover{transform:translateY(-4px);border-color:#ffffff30}
+.f::before{content:"";position:absolute;inset:-1px;background:radial-gradient(300px 160px at 0 0,var(--c1)33,transparent 70%);pointer-events:none}
+.f .ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--c1);margin-bottom:14px;box-shadow:0 8px 24px var(--c1)55}
+.f .ic svg{width:22px;height:22px;stroke:#0b0b14;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.f h3{font-size:18px;margin-bottom:6px}.f p{color:var(--m);font-size:14px}
+.f ul{margin-top:10px;list-style:none;color:#cfcfe0;font-size:13px}.f li{padding:2px 0}.f li::before{content:"●";color:var(--c1);margin-right:8px;font-size:9px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.lens{width:100%;max-width:420px;aspect-ratio:1;margin:auto}
+.lens path{transition:.3s;transform-origin:210px 210px}
+.lens path:hover{transform:scale(1.04)}
+.mon{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;max-width:360px;margin:auto}
+.mon .row{display:flex;align-items:center;gap:10px;font-size:13px;padding:7px 0}
+.mon .bar{flex:1;height:6px;border-radius:9px;background:#ffffff14;overflow:hidden}.mon .bar i{display:block;height:100%;border-radius:9px;transition:width 1s}
+.mon .v{width:70px;text-align:right;font-variant-numeric:tabular-nums}
+.trust{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:40px}
+.trust div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;font-size:14px;color:var(--m)}
+.trust b{display:block;color:var(--t);font-size:15px;margin-bottom:4px}
+.dl{background:linear-gradient(135deg,#7c9cff22,#ff8fb122,#7cf0c822);border:1px solid var(--line);border-radius:28px;padding:56px 24px;text-align:center}
+.faq{max-width:760px;margin:40px auto 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--m);margin-top:8px;font-size:14px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--m);font-size:13px}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.rv{opacity:0;transform:translateY(24px);transition:.8s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+@media(max-width:860px){.mock{grid-template-columns:1fr}.side{display:none}.grid{grid-template-columns:1fr}.split{grid-template-columns:1fr}.trust{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:1fr 1fr}nav a.l{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><img src="icon.svg" alt=""><b>KeepMyMacHealthy</b><span class="sp"></span>
+<a class="l" href="#features">Features</a><a class="l" href="#lens">Space Lens</a><a class="l" href="#monitor">Monitor</a><a class="l" href="#faq">FAQ</a>
+<a class="btn pri" href="https://github.com/AbhiramUpadrashta/KeepMyMacHealthy/releases/latest/download/KeepMyMacHealthy.dmg">Download free</a></div></nav>
+
+<header><div class="wrap">
+<div class="orb" style="width:420px;height:420px;background:var(--b);left:-120px;top:-60px"></div>
+<div class="orb" style="width:380px;height:380px;background:var(--p);right:-100px;top:40px;animation-delay:-4s"></div>
+<div class="eyebrow">Free · Open source · By Bubbles Aro</div>
+<h1>Keep your Mac<br><span class="grad">clean, safe and fast.</span></h1>
+<p class="lead">One scan finds junk, adware, slowdowns, outdated apps and forgotten files. One click takes care of it. No subscription, no ads, no catch.</p>
+<div class="cta"><a class="btn pri" href="https://github.com/AbhiramUpadrashta/KeepMyMacHealthy/releases/latest/download/KeepMyMacHealthy.dmg">Download for macOS</a><a class="btn" href="#features">See what it does</a></div>
+<p class="small">macOS 14 Sonoma or later · Apple silicon & Intel · moves itself to Applications</p>
+
+<div class="mock rv" id="mock">
+ <div class="side" id="side"><div class="dots"><i></i><i></i><i></i></div></div>
+ <div class="stage" id="stage"><div class="bg"></div>
+  <div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" stroke="#ffffff14" stroke-width="7" fill="none"/><circle id="arc" cx="50" cy="50" r="44" stroke="url(#gg)" stroke-width="7" fill="none" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="276"/><defs><linearGradient id="gg"><stop offset="0" stop-color="#7C9CFF"/><stop offset=".5" stop-color="#FF8FB1"/><stop offset="1" stop-color="#7CF0C8"/></linearGradient></defs></svg><div class="num"><div><span id="pct">0</span><small id="lbl">Scanning</small></div></div></div>
+  <h3 id="st">Smart Care</h3><p id="sp">Checking junk, threats, speed, apps and clutter…</p>
+  <div class="tiles" id="tiles"></div>
+  <div class="go" id="go">Run</div>
+ </div>
+</div>
+</div></header>
+
+<section id="features"><div class="wrap">
+<div class="center rv"><div class="eyebrow">Everything in one app</div><h2>Nine tools. <span class="grad">One healthy Mac.</span></h2>
+<p class="lead">Every module scans first and shows you exactly what it found. Things go to the Trash, so you can always change your mind.</p></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<section id="lens"><div class="wrap split">
+<div class="rv"><div class="eyebrow">Space Lens</div><h2>See what's <span class="grad">eating your disk.</span></h2>
+<p class="lead" style="margin-left:0">An interactive map of your storage. Hover to measure, click to dive into a folder, and send the biggest offenders to the Trash in a click.</p></div>
+<svg class="lens rv" viewBox="0 0 420 420" id="lensSvg"></svg>
+</div></section>
+
+<section id="monitor"><div class="wrap split">
+<div class="mon rv" id="mon"></div>
+<div class="rv"><div class="eyebrow">Health Monitor</div><h2>Your Mac's vitals, <span class="grad">in the menu bar.</span></h2>
+<p class="lead" style="margin-left:0">CPU, memory, storage, battery health, charge cycles and network speed, live. Get an alert before your disk fills up and free up RAM in one click.</p></div>
+</div></section>
+
+<section><div class="wrap center">
+<div class="rv"><div class="eyebrow">Made to be trusted</div><h2>Careful by design.</h2></div>
+<div class="trust rv">
+<div><b>Trash first</b>Everything removed goes to the Trash, so nothing is lost by accident.</div>
+<div><b>Your password stays yours</b>System tasks use macOS's own password prompt. The app never sees it.</div>
+<div><b>Never touches passwords</b>Privacy cleanup clears history and cookies, never saved logins.</div>
+<div><b>Ignore list</b>Protect any folder: scans skip it and nothing inside is ever removed.</div>
+<div><b>Open source</b>MIT-licensed code you can read, with signed, self-installing updates.</div>
+</div></div></section>
+
+<section><div class="wrap"><div class="dl rv">
+<h2>Give your Mac a <span class="grad">check-up.</span></h2>
+<p class="lead">Download, open, and it moves itself into Applications. Run Smart Care and you're done.</p>
+<div class="cta"><a class="btn pri" href="https://github.com/AbhiramUpadrashta/KeepMyMacHealthy/releases/latest/download/KeepMyMacHealthy.dmg">Download KeepMyMacHealthy</a><a class="btn" href="https://github.com/AbhiramUpadrashta/KeepMyMacHealthy/releases">All releases</a></div>
+<p class="small">First launch: right-click the app → Open (it's free and not from the App Store).</p>
+</div></div></section>
+
+<section id="faq" style="padding-top:20px"><div class="wrap">
+<div class="center rv"><h2>Questions</h2></div>
+<div class="faq rv">
+<details><summary>Is it really free?</summary><p>Yes. No trial, no subscription, no ads. It's made by Bubbles Aro and released under the MIT License.</p></details>
+<details><summary>Is it safe to clean caches?</summary><p>Caches are temporary files apps recreate when needed. KeepMyMacHealthy skips caches macOS depends on, and everything goes to the Trash first.</p></details>
+<details><summary>Why does it ask for Full Disk Access?</summary><p>macOS protects Mail, Safari and some app data. With Full Disk Access the scan can see and clean those too. Without it, everything else still works.</p></details>
+<details><summary>Why does it ask for my password?</summary><p>Only for system maintenance like freeing RAM, reindexing Spotlight or removing system-wide adware. The prompt is macOS's own; the app never sees your password.</p></details>
+<details><summary>How do updates work?</summary><p>Settings → Check for Updates downloads the newest release, verifies its signature and installs it in place.</p></details>
+</div></div></section>
+
+<footer><div class="wrap"><span>© 2026 KeepMyMacHealthy · by <a href="https://bubbles.foo.ng/">Bubbles Aro</a></span><span style="flex:1"></span>
+<a href="https://bubbles.foo.ng/projects.html">More apps</a><a href="mailto:abhi@bubbles.foo.ng">Support</a></div></footer>
+
+<script>
+const I={heart:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>',spark:'<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>',shield:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',apps:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',lens:'<circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 5"/>',pulse:'<path d="M3 12h4l2-5 4 10 2-5h6"/>',cut:'<circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M8.5 8L20 18M8.5 16L20 6"/>'};
+const svg=(k)=>`<svg viewBox="0 0 24 24">${I[k]}</svg>`;
+const M=[
+['Smart Care','heart','#FF8FB1','One scan checks everything, one click fixes the safe stuff, and a health score tells you how your Mac is doing.',['Junk, threats, speed, apps & clutter','Health score','Review any tile in detail'],'','Scanning','Checking junk, threats, speed, apps and clutter…'],
+['Cleanup','spark','#7CF0C8','Clear system and app caches, logs, browser caches, Xcode and developer junk, Mail attachments, broken preferences and Trash bins.',['User & system caches','Browser, developer & AI tool caches','Mail attachments, old installers, iOS backups'],'Care','Junk found','Caches, logs, Xcode junk, Mail attachments…'],
+['Protection','shield','#FF7F8C','Find adware and suspicious background programs, check app signatures and wipe browsing history and cookies.',['Adware & malware check','Launch agents & daemons','Privacy cleanup for 5 browsers'],'Care','Threats','Checking launch agents, apps and signatures…'],
+['Performance','bolt','#FFBC5C','Run maintenance tasks, switch off background items you don\'t need and quit apps that hog your Mac.',['Free RAM, flush DNS, reindex Spotlight','Docker & Homebrew cleanup','Login & background items, heavy apps'],'Care','Tasks','Maintenance scripts, background items, heavy apps…'],
+['Applications','apps','#7C9CFF','Uninstall apps with every leftover file, clean up after apps you already deleted, reset apps and catch updates.',['Complete uninstaller','Updater for Sparkle & App Store apps','Leftovers & app reset'],'Files & Apps','Updates','Finding apps, leftovers and updates…'],
+['My Clutter','folder','#66D1FF','Spot huge and forgotten files, old project build folders, exact duplicates, similar photos and old downloads.',['Large & old files','node_modules, build output & virtualenvs','Duplicates & similar images'],'Files & Apps','Clutter','Large files, duplicates and similar photos…'],
+['Space Lens','lens','#B88CFF','A live map of your storage. Click to dive in, trash big folders right from the map.',['Interactive sunburst','Home or whole disk','Trash from the map'],'Files & Apps','Mapping','Measuring folders…'],
+['Health Monitor','pulse','#7CF0C8','Live CPU, memory, storage, battery health and network, plus a menu bar monitor and low-disk alerts.',['Menu bar monitor','Battery health & cycles','Low-disk alerts'],'Tools','Live','CPU, memory, storage, battery and network…'],
+['Shredder','cut','#FF9966','Drop sensitive files to overwrite and delete them so they can\'t be recovered.',['Drag & drop','Overwrite before delete','Files & folders'],'Tools','Shred','Drop files to erase them for good…'],
+];
+// sidebar
+const side=document.getElementById('side');let sec=null;
+M.forEach((m,i)=>{if(m[5]!==sec){sec=m[5];if(sec)side.insertAdjacentHTML('beforeend',`<div class="sec">${sec.toUpperCase()}</div>`)}
+side.insertAdjacentHTML('beforeend',`<div class="it" data-i="${i}"><span class="ic" style="background:${m[2]}">${svg(m[1])}</span>${m[0]}</div>`)});
+// feature grid
+document.getElementById('grid').innerHTML=M.map(m=>`<div class="f rv" style="--c1:${m[2]}"><div class="ic">${svg(m[1])}</div><h3>${m[0]}</h3><p>${m[3]}</p><ul>${m[4].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+// mock animation
+const stage=document.getElementById('stage'),arc=document.getElementById('arc'),pct=document.getElementById('pct'),lbl=document.getElementById('lbl'),tiles=document.getElementById('tiles');
+const T=[['2.4 GB','of junk'],['Safe','no threats'],['6','speed tasks'],['3','app updates'],['5.1 GB','to review'],['92','health score']];
+let cur=0,timer;
+function show(i){cur=i;document.querySelectorAll('.side .it').forEach(e=>e.classList.toggle('on',+e.dataset.i===i));
+ const m=M[i];stage.style.setProperty('--tint',m[2]);document.getElementById('st').textContent=m[0];document.getElementById('sp').textContent=m[7];lbl.textContent=m[6];
+ tiles.innerHTML=i===0?T.map(t=>`<div class="tile"><b>${t[0]}</b><span>${t[1]}</span></div>`).join(''):'';
+ let p=0;clearInterval(timer);timer=setInterval(()=>{p+=2;if(p>=100){p=100;clearInterval(timer);[...tiles.children].forEach((t,k)=>setTimeout(()=>t.classList.add('show'),k*120))}
+ pct.textContent=p;arc.style.strokeDashoffset=276-276*p/100},30)}
+side.addEventListener('click',e=>{const it=e.target.closest('.it');if(it){show(+it.dataset.i);clearInterval(auto)}});
+show(0);let auto=setInterval(()=>show((cur+1)%M.length),5200);
+// space lens sunburst
+const L=document.getElementById('lensSvg'),cols=['#7C9CFF','#FF8FB1','#7CF0C8','#FFBC5C','#B88CFF','#66D1FF','#FF7F8C'];
+const parts=[['Movies',34],['Developer',22],['Photos',16],['Downloads',11],['Music',8],['Documents',6],['Other',3]];
+function arcP(a0,a1,r0,r1){const p=(a,r)=>[210+r*Math.cos(a),210+r*Math.sin(a)];const l=a1-a0>Math.PI?1:0;const[x0,y0]=p(a0,r1),[x1,y1]=p(a1,r1),[x2,y2]=p(a1,r0),[x3,y3]=p(a0,r0);return`M${x0},${y0}A${r1},${r1} 0 ${l} 1 ${x1},${y1}L${x2},${y2}A${r0},${r0} 0 ${l} 0 ${x3},${y3}Z`}
+let a=-Math.PI/2,h='';parts.forEach((p,i)=>{const s=p[1]/100*2*Math.PI;h+=`<path d="${arcP(a,a+s-0.01,95,195)}" fill="${cols[i]}" opacity=".85"><title>${p[0]}</title></path>`;
+ let b=a;for(let k=0;k<3;k++){const ss=s*[0.5,0.3,0.2][k];h+=`<path d="${arcP(b,b+ss-0.008,60,92)}" fill="${cols[i]}" opacity="${.35+k*.12}"/>`;b+=ss}a+=s});
+L.innerHTML=h+'<text x="210" y="205" text-anchor="middle" fill="#fff" font-size="28" font-weight="800">412 GB</text><text x="210" y="228" text-anchor="middle" fill="#a4a4bd" font-size="12">Macintosh HD</text>';
+// monitor
+const mon=document.getElementById('mon');const R=[['CPU','#7C9CFF'],['Memory','#FF8FB1'],['Storage','#FFBC5C'],['Battery','#7CF0C8']];
+mon.innerHTML='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><img src="icon.svg" width="26"><b style="font-size:14px">KeepMyMacHealthy</b><span style="flex:1"></span><b style="color:#7CF0C8">92</b></div>'+R.map((r,i)=>`<div class="row"><span style="width:62px">${r[0]}</span><span class="bar"><i id="b${i}" style="background:${r[1]}"></i></span><span class="v" id="v${i}"></span></div>`).join('')+'<div class="row" style="color:#a4a4bd">↓ <span id="dn">2.1 MB/s</span> &nbsp; ↑ <span id="upl">340 KB/s</span></div>';
+function tick(){const v=[20+Math.random()*40,55+Math.random()*15,71,86];const lab=[Math.round(v[0])+'%',(v[1]*.16).toFixed(1)+' GB','118 GB free','86%'];
+ v.forEach((x,i)=>{document.getElementById('b'+i).style.width=x+'%';document.getElementById('v'+i).textContent=lab[i]});
+ document.getElementById('dn').textContent=(Math.random()*4+.5).toFixed(1)+' MB/s';document.getElementById('upl').textContent=Math.round(Math.random()*500+80)+' KB/s'}
+tick();setInterval(tick,1600);
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>
